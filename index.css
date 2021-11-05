@@ -1,0 +1,357 @@
+:root {
+    box-sizing: border-box;
+    --white: rgb(255, 255, 255);
+    --lightRed: rgb(133, 44, 44);
+    --darkRed: rgb(63, 5, 5);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+html {
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(133, 44, 44));
+    background-repeat: no-repeat;
+}
+
+body {
+    margin: 10px;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    height: 20%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(133, 44, 44, 0.7)) ,url("/images/van1.jpeg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.logo {
+    margin: auto;
+    opacity: 0.9;
+    width: 290px;
+}
+
+.desktop-navbar {
+    display: none;
+    width: 0px;
+}
+
+.hamburger-menu {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 26px;
+    height: 23px;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    z-index: 1;
+}
+
+.hamburger {
+    width: 26px;
+    height: 4px;
+    background-color: var(--darkRed);
+    border-radius: 50px;
+    transition: all .5s ease-in-out;
+}
+
+.hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 4px;
+    background-color: var(--darkRed);
+    border-radius: 50px;
+    transition: all .5s ease-in-out;
+}
+
+.hamburger::before {
+    transform: translateY(-10px);
+}
+
+.hamburger::after {
+    transform: translateY(10px);
+}
+
+.hamburger-menu.open .hamburger {
+    transform: translateX(-50px);
+    background: transparent;
+}
+
+.hamburger-menu.open .hamburger::before {
+    transform: rotate(45deg) translate(35px, -35px);
+}
+
+.hamburger-menu.open .hamburger::after {
+    transform: rotate(-45deg) translate(35px, 35px);
+}
+
+.nav-menu {
+    visibility: visible;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.mobile-nav {
+    opacity: 0;
+    transition: opacity 0.5s;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    background: linear-gradient(rgba(255, 255, 255, 1), rgba(133, 44, 44, 0.8));
+    height: 100vh;
+    width: 100vw;
+}
+
+.mobile-nav.open {
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.5s;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    background: linear-gradient(rgba(255, 255, 255, 1), rgba(133, 44, 44, 0.8));
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+}
+
+.mobile-nav-item {
+    margin: 1.25rem 12.5rem;
+    padding: 0.5rem 0;
+    text-align: center;
+}
+
+.nav-rule {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s;
+    top: 288px;
+    right: 0px;
+    width: 100%;
+    z-index: 1;
+}
+
+.nav-rule.open {
+    position: absolute;
+    opacity: 0.6;
+    transition: opacity 1s;
+    top: 288px;
+    right: 0px;
+    width: 100%;
+    z-index: 1;
+}
+
+main {
+    background-image: linear-gradient(rgba(133, 44, 44, 0.7), rgba(63, 5, 5, 0.7)) ,url("/images/van-background.png");
+    background-size: 100%;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.main-text {
+    background-color: rgba(63, 5, 5, 0.7);
+    border-radius: 0px 0px 20px 20px;
+    padding: 30px 30px 10px 30px;
+}
+
+h1 {
+    font-size: 1.5em;
+    color: var(--white);
+}
+
+.main-head-1 {
+    margin: 0;
+    padding-bottom: 5px;
+    font-weight: 700;
+}
+
+.main-para {
+    color: var(--white);
+    margin: 0;
+    padding-bottom: 20px;
+    font-weight: 400;
+}
+
+footer {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 20px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(133, 44, 44, 0.7));
+}
+
+.footer-heading {
+    margin-bottom: 0px;
+}
+
+.slideshow {
+    padding: 5%;
+    border-radius: 20px;
+    background-image: linear-gradient(rgba(133, 44, 44, 0.5), rgba(63, 5, 5, 0.5));
+    margin: 1rem;
+
+}
+
+.slide-pic {
+    width: 100%;
+}
+
+.slide-button {
+    border-radius: 0px;
+    width: 40px;
+    height: 50px;
+    opacity: 0.5;
+    margin-bottom: -50px;
+}
+
+#slide-btn-1 {
+    position: relative;
+    float: left;
+    top: -50px
+}
+
+#slide-btn-2 {
+    position: relative;
+    float: right;
+    top: -50px;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+
+.footer-heading {
+    margin-top: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--darkRed);
+}
+
+hr {
+    color: var(--darkRed);
+    z-index: 1;
+}
+
+/*contact page only*/
+.main-contact {
+    background-image: linear-gradient(rgba(133, 44, 44, 0.7), rgba(63, 5, 5, 0.7));
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#contact-heading {
+    font-size: 1.2rem;
+    padding: 0px;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.contacts {
+    color: var(--white);
+    padding-top: 15px;
+}
+
+/*gallery page only*/
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 6fr;
+    grid-row-gap: 20px;
+    padding: 20px;
+    background-image: linear-gradient(rgba(133, 44, 44, 0.7), rgba(63, 5, 5, 0.7));
+}
+
+.gallery-item {
+    width: 100%;
+    height: 11rem;
+}
+
+/*desktop view*/
+@media (min-width: 1000px) {
+    
+    header {
+        flex-direction: column;
+    }
+
+    .hamburger-menu, .hamburger {
+        display: none;
+        width: 0px;
+    }
+
+    .desktop-navbar {
+        display: contents;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .desktop-nav {
+        display: flex;
+        justify-content: center;
+        padding: 0rem;
+        margin: 0px;
+        background-image: linear-gradient(rgba(133, 44, 44, 0.7), rgba(63, 5, 5, 0.7));
+    }
+
+    .desktop-nav-item {
+        list-style: none;
+        text-align: center;
+        padding: 1rem;
+        color: var(--white);
+        font-size: 1.3rem;
+        font-weight: 700;
+        width: 33.33%;
+    }
+
+    #middle-nav {
+        border-right: var(--lightRed) 2px solid;
+        border-left: var(--lightRed) 2px solid;
+    }
+
+    .mobile-nav, .nav-rule {
+        display: none;
+    }
+
+    .footer-heading {
+        text-align: center;
+    }
+
+    .slideshow {
+        margin: 1rem 8rem;
+    }
+
+    /*gallery page only*/ 
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-column-gap: 20px;
+    }
+
+}
