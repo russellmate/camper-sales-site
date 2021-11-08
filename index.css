@@ -262,8 +262,9 @@ hr {
 }
 
 #contact-heading {
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0px;
+    color: var(--white);
 }
 
 .contact-list {
@@ -271,12 +272,45 @@ hr {
     flex-direction: column;
     list-style: none;
     padding: 0px;
-    margin: 0px;
+    margin: 0px 0px 15px 0px;
 }
 
 .contacts {
     color: var(--white);
     padding-top: 15px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+}
+
+.name-input, .email-input, .query-input {
+    margin-top: 0.8rem;
+    width: 100%;
+}
+
+.input-label {
+    color: var(--white);
+}
+
+.form-name, .form-email, .question {
+    box-sizing: border-box;
+    margin-top: 0.2rem;
+    padding: 0.3rem;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.submit-button {
+    margin: 0.8rem auto 0 auto;
+    padding: 0.4rem;
+    width: 50%;
+    max-width: 250px;
+    font-size: 0.8rem;
 }
 
 /*gallery page only*/
@@ -292,6 +326,17 @@ hr {
 .gallery-item {
     width: 100%;
     height: 11rem;
+}
+
+/*tablet view*/
+@media (min-width: 800px) {
+    #contact-heading {
+        max-width: 50%;
+    }
+
+    .contact-form {
+        max-width: 50%;
+    }
 }
 
 /*desktop view*/
@@ -353,5 +398,4 @@ hr {
         grid-template-rows: 1fr 1fr;
         grid-column-gap: 20px;
     }
-
 }
