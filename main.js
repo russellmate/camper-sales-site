@@ -25,13 +25,8 @@ menuBtn.addEventListener('click', () => {
     menuBtn.classList.add('open');
     menuList.classList.add('open');
     navRule.classList.add('open');
+    document.body.style.overflow = 'hidden';
     menuOpen = true;
-    document.querySelector('body').addEventListener('scroll', preventScroll, {passive: false});
-    function preventScroll(e){
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
-    }
   } else { 
     menuBtn.classList.remove('open');
     menuList.classList.remove('open');
