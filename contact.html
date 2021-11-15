@@ -42,8 +42,8 @@
                 <li class="contacts">Phone:<br>0775349867</li>
                 <li class="contacts">Address:<br>12 Harpur Industrial Estate<br>Buxton<br>SK17 8EF<br>Derbyshire</li>
             </ul>
-            <h2 class="main-head-1" id="contact-heading">Alternatively, please enter your name, email address and query into the form below and we will get get back to you as soon as possible.</h2>
-            <form action="contact-form.php" method="get" name="contact-form" class="contact-form">
+            <h2 class="main-head-1" id="contact-heading">Alternatively, please enter your name, email address and message into the form below and we will get get back to you as soon as possible.</h2>
+            <form action="/contact-form.php" method="POST" name="contact-form" class="contact-form">
                 <div class="name-input">
                     <label for="name" class="input-label">Enter your name:</label>
                     <input type="name" class="form-name" name="name" required>
@@ -52,11 +52,11 @@
                     <label for="email" class="input-label">Enter your email:</label>
                     <input type="email" class="form-email" name="email" required>
                 </div>
-                <div class="query-input">
-                    <label for="question" class="input-label">Please type your query:</label>
-                    <textarea name="question" class="question" cols="30" rows="10" maxlength="1000" required></textarea>
+                <div class="message-input">
+                    <label for="message" class="input-label">Please type your message:</label>
+                    <textarea name="message" class="message" cols="30" rows="10" maxlength="1000" required></textarea>
                 </div>
-                <button class="submit-button" type="submit">Submit</button>
+                <button class="submit-button" type="submit" value="send">Submit</button>
             </form>
         </div>
     </main>

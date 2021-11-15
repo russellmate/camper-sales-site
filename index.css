@@ -102,6 +102,7 @@ header {
 }
 
 .mobile-nav {
+    display: none;
     opacity: 0;
     transition: opacity 0.5s;
     top: 0px;
@@ -130,6 +131,7 @@ header {
     margin: 0px;
     padding: 0px;
     background: linear-gradient(rgba(255, 255, 255, 1), rgba(133, 44, 44, 0.8));
+    background-attachment: fixed;
     height: 100vh;
     width: 100vw;
 }
@@ -194,52 +196,47 @@ footer {
     margin: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 15px;
     border-radius: 20px;
     background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(133, 44, 44, 0.7));
 }
 
 .footer-heading {
-    margin-bottom: 0px;
+    margin-bottom: 1rem;
+    margin-top: 0px;
 }
 
 .slideshow {
-    padding: 5%;
-    border-radius: 20px;
-    background-image: linear-gradient(rgba(133, 44, 44, 0.5), rgba(63, 5, 5, 0.5));
-    margin: 1rem;
+    position: relative;
+    width: 16rem;
+    height: 12rem;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .slide-pic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
     width: 100%;
+    height: 100%;
+    -webkit-transition: opacity 2s;
+    -moz-transition: opacity 2s;
+    -o-transition: opacity 2s;
+    transition: opacity 2s;
 }
 
-.slide-button {
-    border-radius: 0px;
-    width: 40px;
-    height: 50px;
-    opacity: 0.5;
-    margin-bottom: -50px;
-}
-
-#slide-btn-1 {
-    position: relative;
-    float: left;
-    top: -50px
-}
-
-#slide-btn-2 {
-    position: relative;
-    float: right;
-    top: -50px;
+.card-part-1 {
+    opacity: 1;
+    z-index: 2;
 }
 
 h2 {
     font-size: 1.2em;
-}
-
-.footer-heading {
-    margin-top: 0px;
 }
 
 a {
@@ -285,7 +282,7 @@ hr {
     max-width: 100%;
 }
 
-.name-input, .email-input, .query-input {
+.name-input, .email-input, .message-input {
     margin-top: 0.8rem;
     width: 100%;
 }
@@ -294,7 +291,7 @@ hr {
     color: var(--white);
 }
 
-.form-name, .form-email, .question {
+.form-name, .form-email, .message {
     box-sizing: border-box;
     margin-top: 0.2rem;
     padding: 0.3rem;
@@ -327,7 +324,6 @@ hr {
 .gallery-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 6fr;
     grid-row-gap: 20px;
     padding: 1rem;
     background-image: linear-gradient(rgba(133, 44, 44, 0.7), rgba(63, 5, 5, 0.7));
@@ -349,8 +345,23 @@ hr {
     color: var(--white);
 }
 
-/*tablet view*/
+/*tablet view 1*/
+@media (min-width: 500px) {
+
+    .slideshow {
+        width: 22rem;
+        height: 16rem;
+    }
+}
+
+/*tablet view 2*/
 @media (min-width: 800px) {
+
+    .slideshow {
+        width: 32rem;
+        height: 24rem;
+    }
+
     /*contact page only*/
     #contact-heading {
         max-width: 50%;
@@ -361,8 +372,9 @@ hr {
     }
 
     /*gallery page only*/
-    .gallery-intro {
-        max-width: 1000px;
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-column-gap: 20px;
     }
 }
 
@@ -416,12 +428,26 @@ hr {
     }
 
     .slideshow {
-        margin: 1rem 8rem;
+        width: 42rem;
+        height: 32rem;
     }
 
-    /*gallery page only*/ 
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        grid-column-gap: 20px;
+    /*gallery page only*/
+    .gallery-intro {
+        padding: 1rem 15%;
+    }
+}
+
+/*large desktop view*/
+@media (min-width: 1400px) {
+
+    .slideshow {
+        width: 58rem;
+        height: 42rem;
+    }
+
+    /*gallery page only*/
+    .gallery-intro {
+        padding: 1rem 25%;
     }
 }

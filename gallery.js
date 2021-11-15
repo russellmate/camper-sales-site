@@ -7,11 +7,13 @@ menuBtn.addEventListener('click', () => {
     menuBtn.classList.add('open');
     menuList.classList.add('open');
     navRule.classList.add('open');
+    document.body.style.overflow = 'hidden';
     menuOpen = true;
-  } else {
+  } else { 
     menuBtn.classList.remove('open');
     menuList.classList.remove('open');
     navRule.classList.remove('open');
+    document.body.style.overflow = 'scroll';
     menuOpen = false;
   }
 });

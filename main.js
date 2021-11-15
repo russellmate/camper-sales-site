@@ -1,21 +1,3 @@
-let slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
-  let i;
-  let x = document.getElementsByClassName("slide-pic");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length} ;
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  x[slideIndex-1].style.display = "block";
-}
-
 const menuBtn = document.querySelector('.hamburger-menu');
 const menuList = document.querySelector('.mobile-nav');
 const navRule = document.querySelector('.nav-rule');
@@ -31,6 +13,16 @@ menuBtn.addEventListener('click', () => {
     menuBtn.classList.remove('open');
     menuList.classList.remove('open');
     navRule.classList.remove('open');
+    document.body.style.overflow = 'scroll';
     menuOpen = false;
   }
 });
+
+let slides = document.querySelectorAll('.slideshow .slide-pic');
+let currentSlide = 0;
+let slideInterval = setInterval(nextSlide,5000);
+function nextSlide() {
+    slides[currentSlide].className = 'slide-pic';
+    currentSlide = (currentSlide+1)%slides.length;
+    slides[currentSlide].className = 'slide-pic card-part-1';
+}
