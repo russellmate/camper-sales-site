@@ -12,7 +12,7 @@ export const business = {
 
 /**
  * While the copy is still draft, search engines are asked not to index the site.
- * Set to false when JR has approved the wording and the site goes live.
+ * Set to false when John has approved the wording and the site goes live.
  */
 export const SITE_IS_DRAFT = true;
 

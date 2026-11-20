@@ -1,6 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/jr-logo.png';
+import logo from '../assets/jr-logo-on-dark.svg';
 import { business, nav } from '../site';
 
 const path = Astro.url.pathname.replace(/\/?$/, '/');
@@ -10,7 +9,7 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
 <header class="site-header">
   <div class="wrap site-header__inner">
     <a class="brand" href="/">
-      <Image src={logo} alt="" width={72} height={72} densities={[1, 2]} class="brand__logo" loading="eager" />
+      <img src={logo.src} alt="" width="72" height="72" class="brand__logo" />
       <span class="brand__name">{business.name}</span>
     </a>
 

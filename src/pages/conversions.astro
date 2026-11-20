@@ -11,7 +11,7 @@ import bareLoadArea from '../assets/upgrades/bare-load-area.jpg';
 
 const photoSizes = '(min-width: 56rem) 20rem, (min-width: 36rem) 45vw, 100vw';
 
-// DRAFT: this list is inferred from photos of JR's work. JR to confirm which Upgrades they offer.
+// The Upgrades known so far, from photos of John's work. Add to this list as John confirms more.
 const upgrades = [
   {
     title: 'Pop-top roof',
@@ -46,39 +46,45 @@ const upgrades = [
   },
 ];
 
+// Glossary order: Enquiry → Inspection → Quote → Deposit → the work → Collection → Final payment.
 const steps = [
-  { title: 'Send an Enquiry', text: 'Tell JR about your van and what you would like done, using the form or by phone.' },
-  { title: 'Talk it through', text: 'JR gets back to you to go through the layout, the work involved and any questions.' },
-  { title: 'Get your Quote', text: 'You receive an individual Quote for your Conversion or Upgrade.' },
-  { title: 'The build', text: 'Your van comes into the Buxton workshop and the work is carried out.' },
-  { title: 'Collect your camper', text: 'JR shows you how everything works before you drive away.' },
+  { title: 'Send an Enquiry', text: 'Tell John about your van and what you would like done, using the form or by phone.' },
+  { title: 'Talk it through', text: 'John gets back to you to go through your ideas, the layout and any questions.' },
+  { title: 'Free Inspection', text: 'Bring your van to the workshop in Buxton so John can look it over. There is no charge.' },
+  { title: 'Your Quote', text: 'John gives you an individual price for the work, and a date he can start.' },
+  { title: 'Pay the Deposit', text: 'Half of the Quote, paid to book your van in.' },
+  { title: 'The build', text: 'John carries out the work at the workshop. A full Conversion on a medium-wheelbase van takes about four weeks.' },
+  { title: 'Collection', text: 'John shows you how everything works, you pay the other half of the Quote, and you drive away in your camper.' },
 ];
 
 const faqs = [
-  { q: 'Can you supply the van?', a: 'No. JR converts vans that Customers already own, so you will need your own van before work can start.' },
-  { q: 'How much does a Conversion cost?', a: "Every Conversion is quoted individually, because it depends on the van and what you would like. Send an Enquiry with your rough budget and JR will tell you what's possible." },
+  { q: 'Can you supply the van?', a: 'No. John converts vans that Customers already own, so you will need your own van before work can start.' },
+  { q: 'Which vans do you convert?', a: 'A range of makes and sizes. John specialises in VW Transporters from the T5 to the T7, and these are the vans where he can offer the most customisation.' },
+  { q: 'How much does a Conversion cost?', a: 'Every Conversion is quoted individually, because it depends on the van and what you would like. Send an Enquiry with your rough budget, then bring the van in for a free Inspection and John will give you a Quote.' },
+  { q: 'How long does a Conversion take?', a: 'About four weeks of work for a full Conversion on a medium-wheelbase van. John will give you a start date with your Quote.' },
+  { q: 'How do I pay?', a: 'Half of the Quote as a Deposit to book your van in, and the other half when you collect it.' },
+  { q: 'Is there a charge for the Inspection?', a: 'No. Bring your van to the workshop in Buxton and John will look it over for free before giving you a Quote.' },
+  { q: 'What if something goes wrong after I collect my van?', a: "If a problem with John's work turns up in the two months after Collection, and it isn't something you caused, he'll repair it. This Aftercare comes on top of your legal rights, not instead of them." },
   { q: 'Can I have just one Upgrade done?', a: 'Yes. Any part of a Conversion, such as a pop-top roof or side windows, can be done on its own.' },
-  { q: 'Which vans do you convert?', a: 'Placeholder: JR to confirm which makes, models and wheelbases they take on.', draft: true },
-  { q: 'How long does a Conversion take?', a: 'Placeholder: JR to confirm typical turnaround times.', draft: true },
 ];
 ---
 
 <Base
   title="Conversions and Upgrades"
-  description="What a full camper Conversion from JR includes, the Upgrades available on their own, and how the process works from Enquiry to collection."
+  description="What a full camper Conversion from John at JR Camper Conversions includes, the Upgrades available on their own, and how it works from Enquiry to Collection."
 >
   <div class="wrap section">
     <DraftNote what="The wording on this page" />
     <h1>Conversions and Upgrades</h1>
     <p class="lede">
-      A full Conversion turns your empty panel van into a camper. If your van is already part way there, any part of a Conversion can be done on its own as an Upgrade.
+      A full Conversion turns your empty panel van into a camper. If your van is already part way there, any part of a Conversion can be done on its own as an Upgrade. John specialises in VW Transporters from the T5 to the T7, and takes on other makes and sizes too.
     </p>
   </div>
 
   <section class="section section--stone" aria-labelledby="upgrades-heading">
     <div class="wrap">
       <h2 id="upgrades-heading">What goes into a Conversion</h2>
-      <p class="prose">A full Conversion usually includes all of the work below. Each part is also available as a separate Upgrade.</p>
+      <p class="prose">A full Conversion usually includes all of the work below, and takes about four weeks for a medium-wheelbase van. Each part is also available as a separate Upgrade.</p>
       <div class="upgrades">
         {
           upgrades.map((u) => (
@@ -113,6 +119,15 @@ const faqs = [
     </ol>
   </section>
 
+  <section class="wrap aftercare" aria-labelledby="aftercare-heading">
+    <div class="aftercare__box">
+      <h2 id="aftercare-heading">Two months of Aftercare</h2>
+      <p>
+        If a problem with John's work turns up in the two months after Collection, and it isn't something you caused, he'll repair it. Aftercare covers Conversions and Upgrades, and comes on top of your legal rights, not instead of them.
+      </p>
+    </div>
+  </section>
+
   <section class="section section--stone" aria-labelledby="faq-heading">
     <div class="wrap"><div class="prose">
       <h2 id="faq-heading">Common questions</h2>
@@ -120,7 +135,6 @@ const faqs = [
         faqs.map((f) => (
           <details class="faq">
             <summary>{f.q}</summary>
-            {f.draft && <DraftNote what="This answer" />}
             <p>{f.a}</p>
           </details>
         ))
@@ -181,7 +195,18 @@ const faqs = [
     counter-reset: step;
     display: grid;
     gap: var(--space-m);
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+
+  @media (min-width: 36rem) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .steps {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .steps li {
@@ -197,6 +222,26 @@ const faqs = [
     line-height: 1;
     color: var(--brick);
     margin-bottom: 0.5rem;
+  }
+
+  .aftercare {
+    padding-bottom: var(--space-xl);
+  }
+
+  .aftercare__box {
+    max-width: var(--measure);
+    padding: var(--space-m);
+    border-left: 6px solid var(--maroon);
+    background: var(--stone);
+    border-radius: var(--radius);
+  }
+
+  .aftercare__box h2 {
+    font-size: var(--step-2);
+  }
+
+  .aftercare__box p {
+    margin: 0;
   }
 
   .faq {

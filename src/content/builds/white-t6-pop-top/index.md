@@ -1,6 +1,6 @@
 ---
-# DRAFT: stage descriptions are placeholders until JR confirms what was done.
-# The wiring, furniture and fridge photos are assumed to be from this van; confirm with JR.
+# DRAFT: stage descriptions are placeholders until John confirms what was done.
+# Number plates are blurred in the photos.
 title: White Transporter T6 with pop-top roof
 summary: A plain white panel van turned into a pop-top camper with a full kitchen, electrics, side windows and new wheels.
 van: Volkswagen Transporter T6

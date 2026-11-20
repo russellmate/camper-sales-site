@@ -10,13 +10,13 @@ const [featured] = await getCollection('builds');
 const { before, after, cover } = featured.data;
 ---
 
-<Base description="JR Camper Conversions turns Customers' panel vans into camper vans, to order, at a workshop in Buxton, Derbyshire.">
+<Base description="Camper van conversions in Buxton, Derbyshire. John converts Customers' own vans to order and specialises in VW Transporters from the T5 to the T7.">
   <section class="wrap hero">
     <div class="hero__text">
       <DraftNote what="The wording on this page" />
       <h1>Your panel van, turned into a camper</h1>
       <p class="lede">
-        JR converts vans to order at a workshop in Buxton, Derbyshire. Bring your van and JR will plan and build the camper around how you want to travel.
+        Camper conversions in Buxton, Derbyshire, built to order on the van you already own. John specialises in VW Transporters from the T5 to the T7, and takes on other makes and sizes too.
       </p>
       <div class="hero__actions">
         <a class="button" href="/contact/">Ask about your van</a>
@@ -28,12 +28,12 @@ const { before, after, cover } = featured.data;
 
   <section class="section section--stone" aria-labelledby="what-heading">
     <div class="wrap">
-      <h2 id="what-heading">What JR does</h2>
+      <h2 id="what-heading">What John does</h2>
       <div class="offer">
         <div>
           <h3>Full Conversions</h3>
           <p>
-            Everything it takes to turn an empty panel van into a camper: stripping out, insulation and lining, windows, electrics, furniture, a kitchen and a pop-top roof.
+            Everything it takes to turn an empty panel van into a camper: stripping out, insulation and lining, windows, electrics, furniture, a kitchen and a pop-top roof. About four weeks of work for a medium-wheelbase van.
           </p>
         </div>
         <div>
@@ -43,9 +43,9 @@ const { before, after, cover } = featured.data;
           </p>
         </div>
         <div>
-          <h3>Quotes</h3>
+          <h3>Free Inspection and Quote</h3>
           <p>
-            Every van and every plan is different, so each job is quoted individually after JR has heard what you have in mind.
+            Bring your van to the Buxton workshop and John will look it over for free, then give you an individual Quote and a start date.
           </p>
         </div>
       </div>
@@ -53,7 +53,21 @@ const { before, after, cover } = featured.data;
     </div>
   </section>
 
-  <section class="wrap section featured" aria-labelledby="featured-heading">
+  <section class="wrap section john" aria-labelledby="john-heading">
+    <h2 id="john-heading">Built by John</h2>
+    <div class="john__body">
+      <p class="lede">
+        John spent his career in manufacturing. When he retired, he put those skills into converting vans, and he has converted six since 2023.
+      </p>
+      <p>
+        He does every job himself and won't call a van finished until it's right. If a problem with his work turns up in the two months after Collection, he'll repair it.
+      </p>
+      <p><a href="/about/">More about John</a></p>
+    </div>
+  </section>
+
+  <section class="section section--stone" aria-labelledby="featured-heading">
+  <div class="wrap featured">
     <a class="featured__media" href={`/builds/${featured.id}/`} tabindex="-1" aria-hidden="true">
       <Image src={cover.src} alt="" widths={[480, 800, 1200]} sizes="(min-width: 56rem) 34rem, 100vw" />
     </a>
@@ -63,14 +77,15 @@ const { before, after, cover } = featured.data;
       <p>{featured.data.summary}</p>
       <p>Follow it through all {featured.data.stages.length} stages, from bare metal to finished camper.</p>
     </div>
+  </div>
   </section>
 
   <section class="visit" aria-labelledby="visit-heading">
     <div class="wrap visit__inner">
       <div>
-        <h2 id="visit-heading">Talk to JR about your van</h2>
+        <h2 id="visit-heading">Talk to John about your van</h2>
         <p>
-          Call <a href={business.phone.href}>{business.phone.display}</a> or send an Enquiry, and include your van's make, model and wheelbase if you know them.
+          Call <a href={business.phone.href}>{business.phone.display}</a> or send an Enquiry with your van's make, model and wheelbase. The Inspection is free.
         </p>
       </div>
       <a class="button visit__button" href="/contact/">Send an Enquiry</a>
@@ -109,6 +124,21 @@ const { before, after, cover } = featured.data;
   .offer > div {
     border-top: 3px solid var(--maroon);
     padding-top: var(--space-s);
+  }
+
+  .john {
+    display: grid;
+    gap: var(--space-s) var(--space-l);
+  }
+
+  @media (min-width: 56rem) {
+    .john {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .john__body {
+    max-width: var(--measure);
   }
 
   .featured {
