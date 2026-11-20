@@ -1,0 +1,268 @@
+---
+import { url } from '../url';
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Lightbox from '../components/Lightbox.astro';
+import DraftNote from '../components/DraftNote.astro';
+import roofCutOut from '../assets/upgrades/roof-cut-out.jpg';
+import sidePanel from '../assets/upgrades/side-panel-before.jpg';
+import sideWindows from '../assets/upgrades/side-windows-fitted.jpg';
+import carpetLining from '../assets/upgrades/carpet-lining.jpg';
+import bareLoadArea from '../assets/upgrades/bare-load-area.jpg';
+
+const photoSizes = '(min-width: 56rem) 20rem, (min-width: 36rem) 45vw, 100vw';
+
+// The Upgrades known so far, from photos of John's work. Add to this list as John confirms more.
+const upgrades = [
+  {
+    title: 'Pop-top roof',
+    text: "The van's roof is cut out and replaced with a lifting roof, giving standing room in camp and space for a bed above.",
+    photos: [{ src: roofCutOut, alt: "Inside a van in the workshop, looking up through the opening where the roof has been cut out.", caption: 'Roof opening cut, ready for the pop-top' }],
+  },
+  {
+    title: 'Side windows',
+    text: 'Solid side panels are cut and fitted with glazed windows, to let light in and give a view out.',
+    photos: [
+      { src: sidePanel, alt: 'The solid grey side panel of a van in the workshop, before windows are fitted.', caption: 'Side panel before' },
+      { src: sideWindows, alt: 'The same grey van with openings cut for side windows.', caption: 'Openings cut for the windows' },
+    ],
+  },
+  {
+    title: 'Insulation and lining',
+    text: 'The bare metal load area is insulated and lined with carpet, keeping the van warmer and quieter.',
+    photos: [
+      { src: bareLoadArea, alt: 'The bare metal load area of an empty van, looking down at the floor and wheel arch.', caption: 'Bare metal, before lining' },
+      { src: carpetLining, alt: 'Grey carpet lining fitted over the walls and wheel arch inside a van.', caption: 'Carpet lining fitted' },
+    ],
+  },
+  {
+    title: 'Leisure electrics',
+    text: 'A separate leisure battery system to run lights, sockets and a fridge without draining the van battery.',
+    photos: [],
+  },
+  {
+    title: 'Furniture and kitchen',
+    text: 'Made-to-fit units with worktop, cupboards and a built-in fridge.',
+    photos: [],
+  },
+];
+
+// Glossary order: Enquiry → Inspection → Quote → Deposit → the work → Collection → Final payment.
+const steps = [
+  { title: 'Send an Enquiry', text: 'Tell John about your van and what you would like done, using the form or by phone.' },
+  { title: 'Talk it through', text: 'John gets back to you to go through your ideas, the layout and any questions.' },
+  { title: 'Free Inspection', text: 'Bring your van to the workshop in Buxton so John can look it over. There is no charge.' },
+  { title: 'Your Quote', text: 'John gives you an individual price for the work, and a date he can start.' },
+  { title: 'Pay the Deposit', text: 'Half of the Quote, paid to book your van in.' },
+  { title: 'The build', text: 'John carries out the work at the workshop. A full Conversion on a medium-wheelbase van takes about four weeks.' },
+  { title: 'Collection', text: 'John shows you how everything works, you pay the other half of the Quote, and you drive away in your camper.' },
+];
+
+const faqs = [
+  { q: 'Can you supply the van?', a: 'No. John converts vans that Customers already own, so you will need your own van before work can start.' },
+  { q: 'Which vans do you convert?', a: 'A range of makes and sizes. John specialises in VW Transporters from the T5 to the T7, and these are the vans where he can offer the most customisation.' },
+  { q: 'How much does a Conversion cost?', a: 'Every Conversion is quoted individually, because it depends on the van and what you would like. Send an Enquiry with your rough budget, then bring the van in for a free Inspection and John will give you a Quote.' },
+  { q: 'How long does a Conversion take?', a: 'About four weeks of work for a full Conversion on a medium-wheelbase van. John will give you a start date with your Quote.' },
+  { q: 'How do I pay?', a: 'Half of the Quote as a Deposit to book your van in, and the other half when you collect it.' },
+  { q: 'Is there a charge for the Inspection?', a: 'No. Bring your van to the workshop in Buxton and John will look it over for free before giving you a Quote.' },
+  { q: 'What if something goes wrong after I collect my van?', a: "If a problem with John's work turns up in the two months after Collection, and it isn't something you caused, he'll repair it. This Aftercare comes on top of your legal rights, not instead of them." },
+  { q: 'Can I have just one Upgrade done?', a: 'Yes. Any part of a Conversion, such as a pop-top roof or side windows, can be done on its own.' },
+];
+---
+
+<Base
+  title="Conversions and Upgrades"
+  description="What a full camper Conversion from John at JR Camper Conversions includes, the Upgrades available on their own, and how it works from Enquiry to Collection."
+>
+  <div class="wrap section">
+    <DraftNote what="The wording on this page" />
+    <h1>Conversions and Upgrades</h1>
+    <p class="lede">
+      A full Conversion turns your empty panel van into a camper. If your van is already part way there, any part of a Conversion can be done on its own as an Upgrade. John specialises in VW Transporters from the T5 to the T7, and takes on other makes and sizes too.
+    </p>
+  </div>
+
+  <section class="section section--stone" aria-labelledby="upgrades-heading">
+    <div class="wrap">
+      <h2 id="upgrades-heading">What goes into a Conversion</h2>
+      <p class="prose">A full Conversion usually includes all of the work below, and takes about four weeks for a medium-wheelbase van. Each part is also available as a separate Upgrade.</p>
+      <div class="upgrades">
+        {
+          upgrades.map((u) => (
+            <section class="upgrade">
+              <h3>{u.title}</h3>
+              <p>{u.text}</p>
+              {u.photos.length > 0 && (
+                <div class="upgrade__photos">
+                  {u.photos.map((p) => (
+                    <Photo src={p.src} alt={p.alt} caption={p.caption} sizes={photoSizes} />
+                  ))}
+                </div>
+              )}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="process-heading">
+    <h2 id="process-heading">How it works</h2>
+    <ol class="steps">
+      {
+        steps.map((s) => (
+          <li>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="wrap aftercare" aria-labelledby="aftercare-heading">
+    <div class="aftercare__box">
+      <h2 id="aftercare-heading">Two months of Aftercare</h2>
+      <p>
+        If a problem with John's work turns up in the two months after Collection, and it isn't something you caused, he'll repair it. Aftercare covers Conversions and Upgrades, and comes on top of your legal rights, not instead of them.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--stone" aria-labelledby="faq-heading">
+    <div class="wrap"><div class="prose">
+      <h2 id="faq-heading">Common questions</h2>
+      {
+        faqs.map((f) => (
+          <details class="faq">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+      <p class="faq-more">Something else? <a href={url('/contact/')}>Send an Enquiry</a>.</p>
+    </div></div>
+  </section>
+  <Lightbox />
+</Base>
+
+<style>
+  .upgrades {
+    display: grid;
+    gap: var(--space-l);
+    margin-top: var(--space-l);
+  }
+
+  .upgrade {
+    display: grid;
+    gap: 0 var(--space-l);
+    padding-top: var(--space-m);
+    border-top: 2px solid var(--ply);
+  }
+
+  @media (min-width: 52rem) {
+    .upgrade {
+      grid-template-columns: minmax(14rem, 1fr) 2fr;
+      grid-template-rows: auto 1fr;
+      align-items: start;
+    }
+
+    .upgrade h3,
+    .upgrade > p {
+      grid-column: 1;
+    }
+
+    .upgrade__photos {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+  }
+
+  .upgrade__photos {
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  @media (min-width: 36rem) {
+    .upgrade__photos {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-m) 0 0;
+    counter-reset: step;
+    display: grid;
+    gap: var(--space-m);
+  }
+
+  @media (min-width: 36rem) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .steps {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .steps li {
+    counter-increment: step;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    display: block;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: var(--step-3);
+    line-height: 1;
+    color: var(--brick);
+    margin-bottom: 0.5rem;
+  }
+
+  .aftercare {
+    padding-bottom: var(--space-xl);
+  }
+
+  .aftercare__box {
+    max-width: var(--measure);
+    padding: var(--space-m);
+    border-left: 6px solid var(--maroon);
+    background: var(--stone);
+    border-radius: var(--radius);
+  }
+
+  .aftercare__box h2 {
+    font-size: var(--step-2);
+  }
+
+  .aftercare__box p {
+    margin: 0;
+  }
+
+  .faq {
+    border-bottom: 1px solid #d8d0c9;
+    padding-block: 0.9rem;
+  }
+
+  .faq summary {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: var(--step-1);
+    color: var(--maroon);
+    cursor: pointer;
+  }
+
+  .faq p {
+    margin: 0.75rem 0 0;
+  }
+
+  .faq-more {
+    margin-top: var(--space-m);
+  }
+</style>

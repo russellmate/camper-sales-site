@@ -1,0 +1,16 @@
+---
+import { url } from '../../url';
+import Base from '../../layouts/Base.astro';
+import DraftNote from '../../components/DraftNote.astro';
+import { business } from '../../site';
+---
+
+<Base title="Enquiry sent" description="Your Enquiry has been sent to JR Camper Conversions.">
+  <div class="wrap section"><div class="prose">
+    <h1>Enquiry sent</h1>
+    <p class="lede">Thanks. Your Enquiry has gone to John, who will reply by email or phone.</p>
+    <DraftNote what="The reply time" />
+    <p>John usually replies within a few working days. If it's urgent, call <a href={business.phone.href}>{business.phone.display}</a>.</p>
+    <p><a class="button button--quiet" href={url('/builds/')}>See a finished Build</a></p>
+  </div></div>
+</Base>

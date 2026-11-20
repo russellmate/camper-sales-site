@@ -1,0 +1,22 @@
+---
+/** Marks placeholder copy that John still needs to write or approve. */
+interface Props {
+  what?: string;
+}
+const { what = 'This wording' } = Astro.props;
+---
+
+<p class="draft-note"><strong>Draft:</strong> {what} is a placeholder until John approves the final copy.</p>
+
+<style>
+  .draft-note {
+    display: inline-block;
+    margin: 0 0 var(--space-s);
+    padding: 0.35em 0.75em;
+    border: 2px dashed var(--ply);
+    border-radius: var(--radius);
+    background: #fbf6ee;
+    color: var(--ink);
+    font-size: var(--step--1);
+  }
+</style>

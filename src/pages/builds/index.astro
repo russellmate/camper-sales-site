@@ -1,0 +1,89 @@
+---
+import { url } from '../../url';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+
+const builds = await getCollection('builds');
+---
+
+<Base
+  title="Builds"
+  description="Camper van Conversions by JR Camper Conversions in Buxton, shown stage by stage from panel van to finished camper."
+>
+  <div class="wrap section">
+    <h1>Builds</h1>
+    <p class="lede">
+      Each Build follows one Customer's van through John's workshop, from the day it arrived to the day it went home as a camper.
+    </p>
+
+    <ul class="build-list">
+      {
+        builds.map((build) => (
+          <li class="build-item">
+            <a class="build-item__media" href={url(`/builds/${build.id}/`)} tabindex="-1" aria-hidden="true">
+              <Image src={build.data.cover.src} alt="" widths={[480, 800, 1200]} sizes="(min-width: 56rem) 40rem, 100vw" />
+            </a>
+            <div>
+              <p class="build-item__van">{build.data.van}</p>
+              <h2>
+                <a href={url(`/builds/${build.id}/`)}>{build.data.title}</a>
+              </h2>
+              <p>{build.data.summary}</p>
+              <p class="build-item__meta">{build.data.stages.length} stages, {build.data.stages.reduce((n, s) => n + s.photos.length, 0)} photos</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .build-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-l) 0 0;
+    display: grid;
+    gap: var(--space-l);
+  }
+
+  .build-item {
+    display: grid;
+    gap: var(--space-m);
+    align-items: center;
+  }
+
+  @media (min-width: 56rem) {
+    .build-item {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+
+  .build-item__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .build-item h2 {
+    font-size: var(--step-2);
+  }
+
+  .build-item h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .build-item h2 a:hover {
+    text-decoration: underline;
+  }
+
+  .build-item__van,
+  .build-item__meta {
+    color: var(--grit);
+    font-size: var(--step--1);
+    margin-bottom: 0.4rem;
+  }
+</style>

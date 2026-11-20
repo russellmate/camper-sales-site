@@ -1,0 +1,145 @@
+---
+import { url } from '../url';
+import Base from '../layouts/Base.astro';
+import DraftNote from '../components/DraftNote.astro';
+import { business } from '../site';
+---
+
+<Base
+  title="About John"
+  description="John runs JR Camper Conversions in Buxton. He retired from manufacturing, has converted six vans since 2023 and specialises in VW Transporters."
+>
+  <div class="wrap section about">
+    <div class="about__text">
+      <DraftNote what="The wording on this page" />
+      <h1>About John</h1>
+      <p class="lede">
+        John is the person behind JR Camper Conversions. He converts every van himself, at his workshop on Harpur Industrial Estate in Buxton.
+      </p>
+
+      <h2>From manufacturing to camper vans</h2>
+      <p>
+        John spent his working life in manufacturing. When he retired, he started converting vans, using the skills that job had given him: measuring carefully, working accurately, and building things that last.
+      </p>
+      <p>
+        He started in 2023, and has converted six vans since, each one planned around how its owner wants to travel.
+      </p>
+
+      <h2>Why Transporters</h2>
+      <p>
+        John works on a range of makes and sizes, but he specialises in the VW Transporter, from the T5 to the T7. Because he knows these vans well, they're where he can offer the most customisation.
+      </p>
+
+      <h2>Getting it right</h2>
+      <p>
+        John is meticulous, a perfectionist who takes real pride in his work, and he won't call a van finished until it's right. If a problem with his work turns up in the two months after you collect your van, and it isn't something you caused, he'll repair it. That Aftercare comes on top of your legal rights, not instead of them.
+      </p>
+
+      <p class="about__links">
+        <a class="button" href={url('/contact/')}>Ask John about your van</a>
+        <a class="button button--quiet" href={url('/builds/')}>See his work</a>
+      </p>
+    </div>
+
+    <aside class="about__side">
+      <div class="photo-slot" role="note">
+        <p><strong>Photo to come:</strong> John at work in the workshop.</p>
+      </div>
+      <dl class="facts">
+        <div>
+          <dt>Converting vans since</dt>
+          <dd>2023</dd>
+        </div>
+        <div>
+          <dt>Vans converted</dt>
+          <dd>6</dd>
+        </div>
+        <div>
+          <dt>Specialises in</dt>
+          <dd>VW Transporter T5 to T7</dd>
+        </div>
+        <div>
+          <dt>Workshop</dt>
+          <dd>{business.address.slice(0, 2).join(', ')}</dd>
+        </div>
+      </dl>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .about {
+    display: grid;
+    gap: var(--space-l);
+    align-items: start;
+  }
+
+  @media (min-width: 56rem) {
+    .about {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    }
+
+    .about__side {
+      position: sticky;
+      top: var(--space-m);
+    }
+
+    .photo-slot {
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  .about__text {
+    max-width: var(--measure);
+  }
+
+  .about__text h2 {
+    font-size: var(--step-2);
+    margin-top: var(--space-m);
+  }
+
+  .about__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-m);
+  }
+
+  .photo-slot {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    padding: var(--space-m);
+    border: 2px dashed var(--ply);
+    border-radius: var(--radius);
+    background: #fbf6ee;
+    text-align: center;
+    font-size: var(--step--1);
+  }
+
+  .photo-slot p {
+    margin: 0;
+  }
+
+  .facts {
+    margin: var(--space-m) 0 0;
+  }
+
+  .facts div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.6rem;
+    border-top: 1px solid #ddd6d0;
+  }
+
+  .facts dt {
+    color: var(--grit);
+  }
+
+  .facts dd {
+    margin: 0;
+    font-weight: 650;
+    text-align: right;
+  }
+</style>

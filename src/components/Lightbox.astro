@@ -1,0 +1,142 @@
+---
+/** One lightbox per page. Opens any link marked data-lightbox, in page order. */
+---
+
+<dialog class="lightbox" aria-label="Photo viewer">
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" alt="" />
+    <figcaption class="lightbox__caption"></figcaption>
+  </figure>
+  <div class="lightbox__controls">
+    <button type="button" class="lightbox__btn" data-step="-1">Previous</button>
+    <p class="lightbox__count" aria-live="polite"></p>
+    <button type="button" class="lightbox__btn" data-step="1">Next</button>
+    <button type="button" class="lightbox__btn lightbox__close">Close</button>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]')];
+
+  if (dialog && links.length) {
+    const img = dialog.querySelector<HTMLImageElement>('.lightbox__img')!;
+    const caption = dialog.querySelector<HTMLElement>('.lightbox__caption')!;
+    const count = dialog.querySelector<HTMLElement>('.lightbox__count')!;
+    let index = 0;
+
+    const show = (i: number) => {
+      index = (i + links.length) % links.length;
+      const link = links[index];
+      const thumb = link.querySelector('img');
+      img.src = link.href;
+      img.alt = thumb?.alt ?? '';
+      caption.textContent = link.dataset.caption ?? '';
+      count.textContent = `Photo ${index + 1} of ${links.length}`;
+    };
+
+    links.forEach((link, i) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        show(i);
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((btn) => {
+      btn.addEventListener('click', () => show(index + Number(btn.dataset.step)));
+    });
+    dialog.querySelector('.lightbox__close')!.addEventListener('click', () => dialog.close());
+
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') show(index + 1);
+      if (event.key === 'ArrowLeft') show(index - 1);
+    });
+
+    // Clicking the dark area around the photo closes the viewer.
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    // Return focus to the photo that was opened.
+    dialog.addEventListener('close', () => links[index]?.focus());
+  }
+</script>
+
+<style>
+  .lightbox {
+    --focus: var(--paper);
+    width: 100vw;
+    height: 100svh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: var(--space-s);
+    border: 0;
+    background: rgb(20 14 13 / 0.98);
+    color: var(--paper);
+  }
+
+  .lightbox[open] {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: var(--space-s);
+  }
+
+  .lightbox::backdrop {
+    background: transparent;
+  }
+
+  .lightbox__figure {
+    margin: 0;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lightbox__img {
+    min-height: 0;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .lightbox__caption {
+    font-size: var(--step--1);
+    text-align: center;
+  }
+
+  .lightbox__controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .lightbox__count {
+    margin: 0;
+    min-width: 8em;
+    text-align: center;
+    font-size: var(--step--1);
+  }
+
+  .lightbox__btn {
+    font: inherit;
+    font-weight: 650;
+    padding: 0.5em 1em;
+    border: 2px solid currentColor;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--paper);
+    cursor: pointer;
+  }
+
+  .lightbox__btn:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+</style>

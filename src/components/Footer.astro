@@ -1,0 +1,91 @@
+---
+import { url } from '../url';
+import { business, nav } from '../site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div>
+      <p class="site-footer__name">{business.name}</p>
+      <address>
+        {business.address.map((line) => <span>{line}</span>)}
+      </address>
+      <p><a href={business.mapUrl}>Open in Google Maps</a></p>
+    </div>
+    <div>
+      <p class="site-footer__heading">Get in touch</p>
+      <p>
+        <a href={business.phone.href}>{business.phone.display}</a><br />
+        <a href={`mailto:${business.email}`}>{business.email}</a>
+      </p>
+      <p><a href={url('/contact/')}>Send an Enquiry</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="site-footer__heading">Pages</p>
+      <ul>
+        {nav.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap">
+    <p class="site-footer__legal">© {year} {business.name}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    --focus: var(--paper);
+    background: var(--ink);
+    color: #e9e3de;
+    padding-block: var(--space-l) var(--space-m);
+    font-size: var(--step--1);
+  }
+
+  .site-footer a {
+    display: inline-block;
+    padding-block: 0.3rem;
+    color: var(--paper);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+
+  .site-footer__name {
+    font-family: var(--font-head);
+    font-size: var(--step-1);
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+  }
+
+  .site-footer__heading {
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+  }
+
+  address {
+    font-style: normal;
+    margin-bottom: 1em;
+  }
+
+  address span {
+    display: block;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .site-footer__legal {
+    margin: var(--space-m) 0 0;
+    padding-top: var(--space-s);
+    border-top: 1px solid rgb(255 255 255 / 0.15);
+  }
+</style>

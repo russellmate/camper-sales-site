@@ -1,0 +1,155 @@
+---
+import { url } from '../../url';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import Photo from '../../components/Photo.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import DraftNote from '../../components/DraftNote.astro';
+
+export async function getStaticPaths() {
+  const builds = await getCollection('builds');
+  return builds.map((build) => ({ params: { id: build.id }, props: { build } }));
+}
+
+interface Props {
+  build: CollectionEntry<'builds'>;
+}
+
+const { build } = Astro.props;
+const { title, summary, van, before, after, stages, draft } = build.data;
+const photoSizes = '(min-width: 64rem) 22rem, (min-width: 36rem) 45vw, 100vw';
+---
+
+<Base title={title} description={summary}>
+  <article>
+    <header class="wrap section build-head">
+      <div>
+        <p class="build-head__crumb"><a href={url('/builds/')}>Builds</a></p>
+        <h1>{title}</h1>
+        <p class="lede">{summary}</p>
+        <p class="build-head__van">Base van: {van}</p>
+        {draft && <DraftNote what="The description of each stage" />}
+      </div>
+      <BeforeAfter before={before} after={after} eager />
+    </header>
+
+    <section class="section section--stone" aria-labelledby="stages-heading">
+      <div class="wrap">
+        <h2 id="stages-heading">How it was built</h2>
+        <ol class="stages">
+          {
+            stages.map((stage, i) => (
+              <li class="stage">
+                <div class="stage__text">
+                  <span class="stage__number" aria-hidden="true">{i + 1}</span>
+                  <h3>{stage.title}</h3>
+                  <p>{stage.description}</p>
+                </div>
+                <div class="stage__photos">
+                  {stage.photos.map((photo) => (
+                    <Photo src={photo.src} alt={photo.alt} caption={photo.caption} sizes={photoSizes} />
+                  ))}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="wrap section next">
+      <h2>Thinking about your own van?</h2>
+      <p class="lede">Every Conversion is quoted individually. Tell John what you have, and bring the van in for a free Inspection.</p>
+      <a class="button" href={url('/contact/')}>Send an Enquiry</a>
+    </section>
+  </article>
+  <Lightbox />
+</Base>
+
+<style>
+  .build-head {
+    display: grid;
+    gap: var(--space-l);
+    align-items: center;
+  }
+
+  @media (min-width: 56rem) {
+    .build-head {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .build-head h1 {
+    font-size: var(--step-3);
+  }
+
+  .build-head__crumb {
+    font-size: var(--step--1);
+    margin-bottom: 0.5rem;
+  }
+
+  .build-head__van {
+    color: var(--grit);
+  }
+
+  .stages {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-l) 0 0;
+    counter-reset: none;
+  }
+
+  .stage {
+    display: grid;
+    gap: var(--space-m);
+    padding-block: var(--space-l);
+    border-top: 2px solid var(--ply);
+  }
+
+  .stage:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  @media (min-width: 52rem) {
+    .stage {
+      grid-template-columns: minmax(14rem, 1fr) 2fr;
+      align-items: start;
+    }
+
+    .stage__text {
+      position: sticky;
+      top: var(--space-m);
+    }
+  }
+
+  .stage__number {
+    display: block;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: var(--step-4);
+    line-height: 1;
+    color: var(--brick);
+    margin-bottom: 0.25rem;
+  }
+
+  .stage h3 {
+    font-size: var(--step-2);
+  }
+
+  .stage__photos {
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  @media (min-width: 36rem) {
+    .stage__photos {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .next {
+    text-align: left;
+  }
+</style>
