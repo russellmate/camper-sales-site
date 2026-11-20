@@ -1,4 +1,5 @@
 ---
+import { url } from '../../url';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
@@ -24,7 +25,7 @@ const photoSizes = '(min-width: 64rem) 22rem, (min-width: 36rem) 45vw, 100vw';
   <article>
     <header class="wrap section build-head">
       <div>
-        <p class="build-head__crumb"><a href="/builds/">Builds</a></p>
+        <p class="build-head__crumb"><a href={url('/builds/')}>Builds</a></p>
         <h1>{title}</h1>
         <p class="lede">{summary}</p>
         <p class="build-head__van">Base van: {van}</p>
@@ -60,7 +61,7 @@ const photoSizes = '(min-width: 64rem) 22rem, (min-width: 36rem) 45vw, 100vw';
     <section class="wrap section next">
       <h2>Thinking about your own van?</h2>
       <p class="lede">Every Conversion is quoted individually. Tell John what you have, and bring the van in for a free Inspection.</p>
-      <a class="button" href="/contact/">Send an Enquiry</a>
+      <a class="button" href={url('/contact/')}>Send an Enquiry</a>
     </section>
   </article>
   <Lightbox />

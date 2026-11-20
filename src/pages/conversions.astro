@@ -1,4 +1,5 @@
 ---
+import { url } from '../url';
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
 import Lightbox from '../components/Lightbox.astro';
@@ -139,7 +140,7 @@ const faqs = [
           </details>
         ))
       }
-      <p class="faq-more">Something else? <a href="/contact/">Send an Enquiry</a>.</p>
+      <p class="faq-more">Something else? <a href={url('/contact/')}>Send an Enquiry</a>.</p>
     </div></div>
   </section>
   <Lightbox />

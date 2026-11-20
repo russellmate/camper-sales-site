@@ -42,6 +42,15 @@ Phone, email and address live in `src/site.ts` and are used everywhere. Change t
 
 Netlify's free plan has 300 credits a month, and each production deploy uses 15. Work on branches and merge to `main` in batches. If the credits run out, the site pauses and stops receiving Enquiries.
 
+## Review copy on GitHub Pages
+
+While the rebuild is on a `rebuild/...` branch, every push publishes a review copy to
+https://russellmate.github.io/camper-sales-site/ (see `.github/workflows/review-copy.yml`).
+It is built with a `/camper-sales-site/` base path, and its Enquiry form is switched off,
+because Enquiries need Netlify. Pages must be set to deploy from the `gh-pages` branch.
+
+Internal links must go through `url()` from `src/url.ts` so they work on both hosts.
+
 ## Going live checklist
 
 - [ ] JR has approved all copy, and the "Draft" notes are gone

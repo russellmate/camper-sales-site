@@ -1,4 +1,5 @@
 ---
+import { url } from '../url';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
@@ -19,8 +20,8 @@ const { before, after, cover } = featured.data;
         Camper conversions in Buxton, Derbyshire, built to order on the van you already own. John specialises in VW Transporters from the T5 to the T7, and takes on other makes and sizes too.
       </p>
       <div class="hero__actions">
-        <a class="button" href="/contact/">Ask about your van</a>
-        <a class="button button--quiet" href={`/builds/${featured.id}/`}>See a finished Build</a>
+        <a class="button" href={url('/contact/')}>Ask about your van</a>
+        <a class="button button--quiet" href={url(`/builds/${featured.id}/`)}>See a finished Build</a>
       </div>
     </div>
     <BeforeAfter before={before} after={after} eager />
@@ -49,7 +50,7 @@ const { before, after, cover } = featured.data;
           </p>
         </div>
       </div>
-      <p><a href="/conversions/">How a Conversion works</a></p>
+      <p><a href={url('/conversions/')}>How a Conversion works</a></p>
     </div>
   </section>
 
@@ -62,18 +63,18 @@ const { before, after, cover } = featured.data;
       <p>
         He does every job himself and won't call a van finished until it's right. If a problem with his work turns up in the two months after Collection, he'll repair it.
       </p>
-      <p><a href="/about/">More about John</a></p>
+      <p><a href={url('/about/')}>More about John</a></p>
     </div>
   </section>
 
   <section class="section section--stone" aria-labelledby="featured-heading">
   <div class="wrap featured">
-    <a class="featured__media" href={`/builds/${featured.id}/`} tabindex="-1" aria-hidden="true">
+    <a class="featured__media" href={url(`/builds/${featured.id}/`)} tabindex="-1" aria-hidden="true">
       <Image src={cover.src} alt="" widths={[480, 800, 1200]} sizes="(min-width: 56rem) 34rem, 100vw" />
     </a>
     <div>
       <h2 id="featured-heading">From the workshop</h2>
-      <h3><a href={`/builds/${featured.id}/`}>{featured.data.title}</a></h3>
+      <h3><a href={url(`/builds/${featured.id}/`)}>{featured.data.title}</a></h3>
       <p>{featured.data.summary}</p>
       <p>Follow it through all {featured.data.stages.length} stages, from bare metal to finished camper.</p>
     </div>
@@ -88,7 +89,7 @@ const { before, after, cover } = featured.data;
           Call <a href={business.phone.href}>{business.phone.display}</a> or send an Enquiry with your van's make, model and wheelbase. The Inspection is free.
         </p>
       </div>
-      <a class="button visit__button" href="/contact/">Send an Enquiry</a>
+      <a class="button visit__button" href={url('/contact/')}>Send an Enquiry</a>
     </div>
   </section>
 </Base>

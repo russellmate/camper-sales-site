@@ -1,4 +1,5 @@
 ---
+import { url } from '../url';
 import Base from '../layouts/Base.astro';
 import DraftNote from '../components/DraftNote.astro';
 import { business } from '../site';
@@ -35,8 +36,8 @@ import { business } from '../site';
       </p>
 
       <p class="about__links">
-        <a class="button" href="/contact/">Ask John about your van</a>
-        <a class="button button--quiet" href="/builds/">See his work</a>
+        <a class="button" href={url('/contact/')}>Ask John about your van</a>
+        <a class="button button--quiet" href={url('/builds/')}>See his work</a>
       </p>
     </div>
 

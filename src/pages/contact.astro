@@ -1,4 +1,5 @@
 ---
+import { url, IS_REVIEW_COPY } from '../url';
 import Base from '../layouts/Base.astro';
 import { business } from '../site';
 ---
@@ -39,7 +40,7 @@ import { business } from '../site';
       class="enquiry"
       name="enquiry"
       method="POST"
-      action="/contact/thanks/"
+      action={url('/contact/thanks/')}
       data-netlify="true"
       netlify-honeypot="bot-field"
     >
@@ -99,7 +100,18 @@ import { business } from '../site';
         <p class="hint" id="message-hint">What you'd like done, and anything John should know about the van.</p>
       </div>
 
-      <button class="button" type="submit">Send Enquiry</button>
+      {
+        IS_REVIEW_COPY ? (
+          <>
+            <p class="review-note" id="review-note">
+              <strong>Review copy:</strong> this version of the site can't send Enquiries. The form will work once the site is on Netlify.
+            </p>
+            <button class="button" type="submit" disabled aria-describedby="review-note">Send Enquiry</button>
+          </>
+        ) : (
+          <button class="button" type="submit">Send Enquiry</button>
+        )
+      }
     </form>
   </div>
 </Base>
@@ -229,6 +241,19 @@ import { business } from '../site';
     width: 1.15rem;
     height: 1.15rem;
     accent-color: var(--maroon);
+  }
+
+  .review-note {
+    padding: 0.6rem 0.8rem;
+    border: 2px dashed var(--ply);
+    border-radius: var(--radius);
+    background: #fbf6ee;
+    font-size: var(--step--1);
+  }
+
+  .button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .hint {

@@ -1,0 +1,49 @@
+# Publishes a review copy of the rebuild branch to GitHub Pages, at
+# https://russellmate.github.io/camper-sales-site/
+# It builds into the gh-pages branch. In Settings → Pages, set the source to
+# "Deploy from a branch", branch gh-pages, folder / (root).
+# The Enquiry form is disabled in this copy, because it needs Netlify.
+name: Review copy (GitHub Pages)
+
+on:
+  push:
+    branches: ['rebuild/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: review-copy
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # The normal build, with type-check and link check, so a broken branch isn't published.
+      - run: npm run build
+
+      - name: Build the review copy under /camper-sales-site/
+        run: npx astro build --outDir review
+        env:
+          SITE_URL: https://russellmate.github.io
+          BASE_PATH: /camper-sales-site/
+          PUBLIC_REVIEW_COPY: 'true'
+
+      - name: Publish to the gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./review
+          publish_branch: gh-pages
+          force_orphan: true

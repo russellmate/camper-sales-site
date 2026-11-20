@@ -1,4 +1,5 @@
 ---
+import { url } from '../../url';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
@@ -20,13 +21,13 @@ const builds = await getCollection('builds');
       {
         builds.map((build) => (
           <li class="build-item">
-            <a class="build-item__media" href={`/builds/${build.id}/`} tabindex="-1" aria-hidden="true">
+            <a class="build-item__media" href={url(`/builds/${build.id}/`)} tabindex="-1" aria-hidden="true">
               <Image src={build.data.cover.src} alt="" widths={[480, 800, 1200]} sizes="(min-width: 56rem) 40rem, 100vw" />
             </a>
             <div>
               <p class="build-item__van">{build.data.van}</p>
               <h2>
-                <a href={`/builds/${build.id}/`}>{build.data.title}</a>
+                <a href={url(`/builds/${build.id}/`)}>{build.data.title}</a>
               </h2>
               <p>{build.data.summary}</p>
               <p class="build-item__meta">{build.data.stages.length} stages, {build.data.stages.reduce((n, s) => n + s.photos.length, 0)} photos</p>

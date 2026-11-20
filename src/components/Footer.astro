@@ -1,4 +1,5 @@
 ---
+import { url } from '../url';
 import { business, nav } from '../site';
 const year = new Date().getFullYear();
 ---
@@ -18,12 +19,12 @@ const year = new Date().getFullYear();
         <a href={business.phone.href}>{business.phone.display}</a><br />
         <a href={`mailto:${business.email}`}>{business.email}</a>
       </p>
-      <p><a href="/contact/">Send an Enquiry</a></p>
+      <p><a href={url('/contact/')}>Send an Enquiry</a></p>
     </div>
     <nav aria-label="Footer">
       <p class="site-footer__heading">Pages</p>
       <ul>
-        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        {nav.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
       </ul>
     </nav>
   </div>
