@@ -1,0 +1,222 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Lightbox from '../components/Lightbox.astro';
+import DraftNote from '../components/DraftNote.astro';
+import roofCutOut from '../assets/upgrades/roof-cut-out.jpg';
+import sidePanel from '../assets/upgrades/side-panel-before.jpg';
+import sideWindows from '../assets/upgrades/side-windows-fitted.jpg';
+import carpetLining from '../assets/upgrades/carpet-lining.jpg';
+import bareLoadArea from '../assets/upgrades/bare-load-area.jpg';
+
+const photoSizes = '(min-width: 56rem) 20rem, (min-width: 36rem) 45vw, 100vw';
+
+// DRAFT: this list is inferred from photos of JR's work. JR to confirm which Upgrades they offer.
+const upgrades = [
+  {
+    title: 'Pop-top roof',
+    text: "The van's roof is cut out and replaced with a lifting roof, giving standing room in camp and space for a bed above.",
+    photos: [{ src: roofCutOut, alt: "Inside a van in the workshop, looking up through the opening where the roof has been cut out.", caption: 'Roof opening cut, ready for the pop-top' }],
+  },
+  {
+    title: 'Side windows',
+    text: 'Solid side panels are cut and fitted with glazed windows, to let light in and give a view out.',
+    photos: [
+      { src: sidePanel, alt: 'The solid grey side panel of a van in the workshop, before windows are fitted.', caption: 'Side panel before' },
+      { src: sideWindows, alt: 'The same grey van with openings cut for side windows.', caption: 'Openings cut for the windows' },
+    ],
+  },
+  {
+    title: 'Insulation and lining',
+    text: 'The bare metal load area is insulated and lined with carpet, keeping the van warmer and quieter.',
+    photos: [
+      { src: bareLoadArea, alt: 'The bare metal load area of an empty van, looking down at the floor and wheel arch.', caption: 'Bare metal, before lining' },
+      { src: carpetLining, alt: 'Grey carpet lining fitted over the walls and wheel arch inside a van.', caption: 'Carpet lining fitted' },
+    ],
+  },
+  {
+    title: 'Leisure electrics',
+    text: 'A separate leisure battery system to run lights, sockets and a fridge without draining the van battery.',
+    photos: [],
+  },
+  {
+    title: 'Furniture and kitchen',
+    text: 'Made-to-fit units with worktop, cupboards and a built-in fridge.',
+    photos: [],
+  },
+];
+
+const steps = [
+  { title: 'Send an Enquiry', text: 'Tell JR about your van and what you would like done, using the form or by phone.' },
+  { title: 'Talk it through', text: 'JR gets back to you to go through the layout, the work involved and any questions.' },
+  { title: 'Get your Quote', text: 'You receive an individual Quote for your Conversion or Upgrade.' },
+  { title: 'The build', text: 'Your van comes into the Buxton workshop and the work is carried out.' },
+  { title: 'Collect your camper', text: 'JR shows you how everything works before you drive away.' },
+];
+
+const faqs = [
+  { q: 'Can you supply the van?', a: 'No. JR converts vans that Customers already own, so you will need your own van before work can start.' },
+  { q: 'How much does a Conversion cost?', a: "Every Conversion is quoted individually, because it depends on the van and what you would like. Send an Enquiry with your rough budget and JR will tell you what's possible." },
+  { q: 'Can I have just one Upgrade done?', a: 'Yes. Any part of a Conversion, such as a pop-top roof or side windows, can be done on its own.' },
+  { q: 'Which vans do you convert?', a: 'Placeholder: JR to confirm which makes, models and wheelbases they take on.', draft: true },
+  { q: 'How long does a Conversion take?', a: 'Placeholder: JR to confirm typical turnaround times.', draft: true },
+];
+---
+
+<Base
+  title="Conversions and Upgrades"
+  description="What a full camper Conversion from JR includes, the Upgrades available on their own, and how the process works from Enquiry to collection."
+>
+  <div class="wrap section">
+    <DraftNote what="The wording on this page" />
+    <h1>Conversions and Upgrades</h1>
+    <p class="lede">
+      A full Conversion turns your empty panel van into a camper. If your van is already part way there, any part of a Conversion can be done on its own as an Upgrade.
+    </p>
+  </div>
+
+  <section class="section section--stone" aria-labelledby="upgrades-heading">
+    <div class="wrap">
+      <h2 id="upgrades-heading">What goes into a Conversion</h2>
+      <p class="prose">A full Conversion usually includes all of the work below. Each part is also available as a separate Upgrade.</p>
+      <div class="upgrades">
+        {
+          upgrades.map((u) => (
+            <section class="upgrade">
+              <h3>{u.title}</h3>
+              <p>{u.text}</p>
+              {u.photos.length > 0 && (
+                <div class="upgrade__photos">
+                  {u.photos.map((p) => (
+                    <Photo src={p.src} alt={p.alt} caption={p.caption} sizes={photoSizes} />
+                  ))}
+                </div>
+              )}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="process-heading">
+    <h2 id="process-heading">How it works</h2>
+    <ol class="steps">
+      {
+        steps.map((s) => (
+          <li>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section section--stone" aria-labelledby="faq-heading">
+    <div class="wrap"><div class="prose">
+      <h2 id="faq-heading">Common questions</h2>
+      {
+        faqs.map((f) => (
+          <details class="faq">
+            <summary>{f.q}</summary>
+            {f.draft && <DraftNote what="This answer" />}
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+      <p class="faq-more">Something else? <a href="/contact/">Send an Enquiry</a>.</p>
+    </div></div>
+  </section>
+  <Lightbox />
+</Base>
+
+<style>
+  .upgrades {
+    display: grid;
+    gap: var(--space-l);
+    margin-top: var(--space-l);
+  }
+
+  .upgrade {
+    display: grid;
+    gap: 0 var(--space-l);
+    padding-top: var(--space-m);
+    border-top: 2px solid var(--ply);
+  }
+
+  @media (min-width: 52rem) {
+    .upgrade {
+      grid-template-columns: minmax(14rem, 1fr) 2fr;
+      grid-template-rows: auto 1fr;
+      align-items: start;
+    }
+
+    .upgrade h3,
+    .upgrade > p {
+      grid-column: 1;
+    }
+
+    .upgrade__photos {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+  }
+
+  .upgrade__photos {
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  @media (min-width: 36rem) {
+    .upgrade__photos {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-m) 0 0;
+    counter-reset: step;
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+
+  .steps li {
+    counter-increment: step;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    display: block;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: var(--step-3);
+    line-height: 1;
+    color: var(--brick);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq {
+    border-bottom: 1px solid #d8d0c9;
+    padding-block: 0.9rem;
+  }
+
+  .faq summary {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: var(--step-1);
+    color: var(--maroon);
+    cursor: pointer;
+  }
+
+  .faq p {
+    margin: 0.75rem 0 0;
+  }
+
+  .faq-more {
+    margin-top: var(--space-m);
+  }
+</style>

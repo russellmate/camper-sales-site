@@ -1,0 +1,205 @@
+@import '@fontsource-variable/bitter';
+@import '@fontsource-variable/open-sans';
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Brand: the two reds from the original site, plus neutrals from the workshop. */
+  --maroon: #3f0505;
+  --brick: #852c2c;
+  --paper: #ffffff;
+  --stone: #f0edea;
+  --grit: #6b625a;
+  --ink: #241b1a;
+  --ply: #d8b98c;
+
+  --focus: var(--brick);
+
+  --font-head: 'Bitter Variable', Georgia, serif;
+  --font-body: 'Open Sans Variable', system-ui, sans-serif;
+
+  --step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --step-0: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.45vw, 1.4375rem);
+  --step-2: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
+  --step-3: clamp(2rem, 1.55rem + 2vw, 3rem);
+  --step-4: clamp(2.5rem, 1.7rem + 3.6vw, 4.25rem);
+
+  --space-xs: 0.5rem;
+  --space-s: 1rem;
+  --space-m: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --space-l: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+  --space-xl: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+
+  --wrap: 72rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --measure: 38rem;
+  --radius: 4px;
+
+  color-scheme: light;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-head);
+  color: var(--maroon);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--step-1);
+  font-weight: 700;
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 1em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--brick);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--maroon);
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ---------- Layout helpers ---------- */
+.wrap {
+  width: 100%;
+  max-width: calc(var(--wrap) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--space-xl);
+}
+
+.section--stone {
+  background: var(--stone);
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 34rem;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+  display: inline-block;
+  padding: 0.75em 1.4em;
+  border: 2px solid var(--maroon);
+  border-radius: var(--radius);
+  background: var(--maroon);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--brick);
+  border-color: var(--brick);
+  color: var(--paper);
+}
+
+.button--quiet {
+  background: transparent;
+  color: var(--maroon);
+}
+
+.button--quiet:hover {
+  background: var(--maroon);
+  color: var(--paper);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,239 @@
+---
+import Base from '../layouts/Base.astro';
+import { business } from '../site';
+---
+
+<Base
+  title="Contact"
+  description="Send JR Camper Conversions an Enquiry about converting your van, or call the workshop in Buxton."
+>
+  <div class="wrap section contact">
+    <div class="contact__intro">
+      <h1>Ask about your van</h1>
+      <p class="lede">
+        Tell JR about your van and what you'd like done. Every Conversion is quoted individually, so the
+        more you share, the more useful the reply.
+      </p>
+
+      <h2 class="contact__subhead">Or get in touch directly</h2>
+      <dl class="contact__details">
+        <div>
+          <dt>Phone</dt>
+          <dd><a href={business.phone.href}>{business.phone.display}</a></dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href={`mailto:${business.email}`}>{business.email}</a></dd>
+        </div>
+        <div>
+          <dt>Workshop</dt>
+          <dd>
+            {business.address.map((line) => <span>{line}</span>)}
+            <a href={business.mapUrl}>Open in Google Maps</a>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <form
+      class="enquiry"
+      name="enquiry"
+      method="POST"
+      action="/contact/thanks/"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+    >
+      <input type="hidden" name="form-name" value="enquiry" />
+      <p class="visually-hidden" aria-hidden="true">
+        <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+      </p>
+
+      <h2 class="enquiry__title">Send an Enquiry</h2>
+      <p class="enquiry__note">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+
+      <div class="field">
+        <label for="name">Your name <span aria-hidden="true">*</span></label>
+        <input id="name" name="name" type="text" autocomplete="name" required />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="email">Email <span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+      </div>
+
+      <fieldset class="field">
+        <legend>What are you interested in?</legend>
+        <div class="choices">
+          <label><input type="radio" name="interest" value="Full Conversion" /> A full Conversion</label>
+          <label><input type="radio" name="interest" value="Upgrade" /> A specific Upgrade</label>
+          <label><input type="radio" name="interest" value="Not sure yet" /> Not sure yet</label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="van">Your van</label>
+        <input id="van" name="van" type="text" aria-describedby="van-hint" />
+        <p class="hint" id="van-hint">Make, model and wheelbase, for example "VW Transporter T6, short wheelbase".</p>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="budget">Rough budget</label>
+          <input id="budget" name="budget" type="text" />
+        </div>
+        <div class="field">
+          <label for="timescale">When would you like it done?</label>
+          <input id="timescale" name="timescale" type="text" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Your message <span aria-hidden="true">*</span></label>
+        <textarea id="message" name="message" rows="6" maxlength="2000" required aria-describedby="message-hint"></textarea>
+        <p class="hint" id="message-hint">What you'd like done, and anything JR should know about the van.</p>
+      </div>
+
+      <button class="button" type="submit">Send Enquiry</button>
+    </form>
+  </div>
+</Base>
+
+<style>
+  .contact {
+    display: grid;
+    gap: var(--space-l);
+    align-items: start;
+  }
+
+  @media (min-width: 60rem) {
+    .contact {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    }
+  }
+
+  .contact__subhead {
+    font-size: var(--step-1);
+    margin-top: var(--space-m);
+  }
+
+  .contact__details {
+    margin: 0;
+  }
+
+  .contact__details div {
+    padding-block: 0.75rem;
+    border-top: 1px solid #ddd6d0;
+  }
+
+  .contact__details dt {
+    font-weight: 700;
+    font-size: var(--step--1);
+    color: var(--grit);
+  }
+
+  .contact__details dd {
+    margin: 0;
+  }
+
+  .contact__details dd span {
+    display: block;
+  }
+
+  .enquiry {
+    background: var(--stone);
+    padding: var(--space-m);
+    border-top: 6px solid var(--maroon);
+    border-radius: var(--radius);
+  }
+
+  .enquiry__title {
+    font-size: var(--step-2);
+  }
+
+  .enquiry__note {
+    font-size: var(--step--1);
+    color: var(--grit);
+  }
+
+  .field {
+    margin: 0 0 1.25rem;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .field-row {
+    display: grid;
+    gap: 0 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+
+  label,
+  legend {
+    display: block;
+    font-weight: 650;
+    margin-bottom: 0.3rem;
+    padding: 0;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  textarea {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 2px solid #b9aea5;
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    border-color: var(--maroon);
+    outline-offset: 1px;
+  }
+
+  input:user-invalid,
+  textarea:user-invalid {
+    border-color: var(--brick);
+    background: #fbf1f1;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .choices label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  input[type='radio'] {
+    width: 1.15rem;
+    height: 1.15rem;
+    accent-color: var(--maroon);
+  }
+
+  .hint {
+    margin: 0.3rem 0 0;
+    font-size: var(--step--1);
+    color: var(--grit);
+  }
+</style>

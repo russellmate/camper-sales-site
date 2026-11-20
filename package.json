@@ -1,0 +1,22 @@
+{
+  "name": "jr-camper-conversions",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build && npm run check:links",
+    "check:links": "linkinator dist --recurse --skip '^https?://(?!(localhost|127\\.0\\.0\\.1)[:/])'",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@fontsource-variable/bitter": "^5.3.0",
+    "@fontsource-variable/open-sans": "^5.3.0",
+    "astro": "^7.4.13",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "linkinator": "^8.1.0"
+  }
+}

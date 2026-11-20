@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { business, SITE_IS_DRAFT } from '../site';
+import bitterFont from '@fontsource-variable/bitter/files/bitter-latin-wght-normal.woff2?url';
+import openSansFont from '@fontsource-variable/open-sans/files/open-sans-latin-wght-normal.woff2?url';
+
+interface Props {
+  title?: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const fullTitle = title ? `${title} | ${business.name}` : `${business.name} | Camper van conversions in Buxton`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href={bitterFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={openSansFont} as="font" type="font/woff2" crossorigin />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {SITE_IS_DRAFT && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#3f0505" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -10rem;
+    z-index: 10;
+    padding: 0.5rem 1rem;
+    background: var(--paper);
+    color: var(--maroon);
+    font-weight: 700;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+</style>

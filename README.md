@@ -1,23 +1,52 @@
-## Camper Van Sales Site
+# JR Camper Conversions
 
-This is my first full site project that I have taken on. It is somewhat of a real life example of a project, as I am building it as an unoffical site for a real business that I know. It is the first time that I have planned and and built a project with no prior instruction whatsoever, and so it has been a real challenge trying to find all the solutions completely on my own. 
+The website for JR Camper Conversions, a workshop in Buxton, Derbyshire, that converts Customers' panel vans into camper vans to order.
 
-There a some thing that are obviously unfinished. The text is just sammple text that I have used to shpw how the space will be filled. The PHP is not currently working on the email form; I am wondering whether it would make more sense to try and use Javascript to implement it instead. This is something I will return to in the futute. 
+The domain language (Conversion, Upgrade, Build, Stage, Customer, Enquiry, Quote) is defined in [CONTEXT.md](./CONTEXT.md). Use those words in code and copy.
 
-## Screenshots
+Built with [Astro](https://astro.build), plain CSS and a little JavaScript. Hosted on Netlify, with Enquiries handled by Netlify Forms.
 
+## Working on the site
 
+You need Node 22.
 
-## Links
+```sh
+npm install
+npm run dev       # local site at http://localhost:4321
+npm run build     # type-check, build to dist/, then check every internal link
+npm run preview   # serve the built site
+```
 
-- Live Site URL: https://russellmate.github.io/camper-sales-site/index.html
+`npm run build` is also what Netlify runs, so a broken link or a Build with missing alt text fails the deploy instead of going live.
 
-## Bult with
+## Adding a Build
 
-- Semantic HTML5 markup
-- Javascript
-- PHP
-- CSS
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
+1. Create a folder in `src/content/builds/`, named after the van (e.g. `blue-transit-custom`).
+2. Put the photos in it, with lowercase hyphenated names (`front-before.jpg`, not `Front before.jpg`). Full-size originals are fine: Astro makes the small, compressed versions.
+3. Copy `index.md` from an existing Build and fill it in. Each Stage needs a title, a description and at least one photo, and every photo needs alt text.
+
+The new Build appears on the Builds page and gets its own page automatically.
+
+## Business details
+
+Phone, email and address live in `src/site.ts` and are used everywhere. Change them there.
+
+`SITE_IS_DRAFT` in the same file keeps search engines away while the copy is still a placeholder. Set it to `false` at launch.
+
+## Netlify setup (one-off)
+
+1. In Netlify, choose **Add new project → Import an existing project** and pick this GitHub repo. The build settings come from `netlify.toml`.
+2. Under **Project configuration → Forms**, enable **form detection**, then redeploy.
+3. Under **Forms → Form notifications**, add an email notification for the `enquiry` form to `jrcampervans@gmail.com`.
+4. Send a test Enquiry from the live Netlify URL and check that it arrives.
+
+Netlify's free plan has 300 credits a month, and each production deploy uses 15. Work on branches and merge to `main` in batches. If the credits run out, the site pauses and stops receiving Enquiries.
+
+## Going live checklist
+
+- [ ] JR has approved all copy, and the "Draft" notes are gone
+- [ ] `SITE_IS_DRAFT` set to `false`
+- [ ] Enquiry notifications reach JR's inbox
+- [ ] Repo renamed to `jr-camper-conversions`
+- [ ] GitHub Pages switched off (Settings → Pages)
+- [ ] Netlify project moved to an account JR owns, before a domain is bought

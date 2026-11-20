@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import DraftNote from '../components/DraftNote.astro';
+import { business } from '../site';
+
+const [featured] = await getCollection('builds');
+const { before, after, cover } = featured.data;
+---
+
+<Base description="JR Camper Conversions turns Customers' panel vans into camper vans, to order, at a workshop in Buxton, Derbyshire.">
+  <section class="wrap hero">
+    <div class="hero__text">
+      <DraftNote what="The wording on this page" />
+      <h1>Your panel van, turned into a camper</h1>
+      <p class="lede">
+        JR converts vans to order at a workshop in Buxton, Derbyshire. Bring your van and JR will plan and build the camper around how you want to travel.
+      </p>
+      <div class="hero__actions">
+        <a class="button" href="/contact/">Ask about your van</a>
+        <a class="button button--quiet" href={`/builds/${featured.id}/`}>See a finished Build</a>
+      </div>
+    </div>
+    <BeforeAfter before={before} after={after} eager />
+  </section>
+
+  <section class="section section--stone" aria-labelledby="what-heading">
+    <div class="wrap">
+      <h2 id="what-heading">What JR does</h2>
+      <div class="offer">
+        <div>
+          <h3>Full Conversions</h3>
+          <p>
+            Everything it takes to turn an empty panel van into a camper: stripping out, insulation and lining, windows, electrics, furniture, a kitchen and a pop-top roof.
+          </p>
+        </div>
+        <div>
+          <h3>Upgrades</h3>
+          <p>
+            Any single part of a Conversion done on its own, such as a pop-top roof, side windows or leisure electrics, for vans that are already part way there.
+          </p>
+        </div>
+        <div>
+          <h3>Quotes</h3>
+          <p>
+            Every van and every plan is different, so each job is quoted individually after JR has heard what you have in mind.
+          </p>
+        </div>
+      </div>
+      <p><a href="/conversions/">How a Conversion works</a></p>
+    </div>
+  </section>
+
+  <section class="wrap section featured" aria-labelledby="featured-heading">
+    <a class="featured__media" href={`/builds/${featured.id}/`} tabindex="-1" aria-hidden="true">
+      <Image src={cover.src} alt="" widths={[480, 800, 1200]} sizes="(min-width: 56rem) 34rem, 100vw" />
+    </a>
+    <div>
+      <h2 id="featured-heading">From the workshop</h2>
+      <h3><a href={`/builds/${featured.id}/`}>{featured.data.title}</a></h3>
+      <p>{featured.data.summary}</p>
+      <p>Follow it through all {featured.data.stages.length} stages, from bare metal to finished camper.</p>
+    </div>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-heading">
+    <div class="wrap visit__inner">
+      <div>
+        <h2 id="visit-heading">Talk to JR about your van</h2>
+        <p>
+          Call <a href={business.phone.href}>{business.phone.display}</a> or send an Enquiry, and include your van's make, model and wheelbase if you know them.
+        </p>
+      </div>
+      <a class="button visit__button" href="/contact/">Send an Enquiry</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    gap: var(--space-l);
+    align-items: center;
+    padding-block: var(--space-l) var(--space-xl);
+  }
+
+  @media (min-width: 56rem) {
+    .hero {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-m);
+  }
+
+  .offer {
+    display: grid;
+    gap: var(--space-m) var(--space-l);
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    margin-block: var(--space-m);
+  }
+
+  .offer > div {
+    border-top: 3px solid var(--maroon);
+    padding-top: var(--space-s);
+  }
+
+  .featured {
+    display: grid;
+    gap: var(--space-l);
+    align-items: center;
+  }
+
+  @media (min-width: 56rem) {
+    .featured {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .featured__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .featured h3 {
+    font-size: var(--step-2);
+  }
+
+  .featured h3 a {
+    color: inherit;
+  }
+
+  .visit {
+    --focus: var(--paper);
+    background: var(--maroon);
+    color: var(--paper);
+    padding-block: var(--space-l);
+  }
+
+  .visit h2 {
+    color: var(--paper);
+    font-size: var(--step-2);
+  }
+
+  .visit a:not(.button) {
+    color: var(--paper);
+  }
+
+  .visit__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+  }
+
+  .visit__inner p {
+    max-width: var(--measure);
+    margin: 0;
+  }
+
+  .visit__button {
+    background: var(--paper);
+    color: var(--maroon);
+    border-color: var(--paper);
+  }
+
+  .visit__button:hover {
+    background: var(--ply);
+    border-color: var(--ply);
+    color: var(--maroon);
+  }
+</style>
